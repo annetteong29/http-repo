@@ -9,6 +9,10 @@ import NewPost from '../../containers/Blog/NewPost/NewPost';
 
 class Blog extends Component {
 
+    state = {
+        auth: false
+    }
+
     render () {
 
         return (
@@ -40,10 +44,11 @@ class Blog extends Component {
                 <Route path="/" render={() => <h1>Home 2</h1>}/> */}
                 {/* order matters, new-post has to be above :postId */}
                 <Switch>
-                    <Route path="/new-post" component={NewPost} />
+                    {this.state.auth ? <Route path="/new-post" component={NewPost} /> : null}
                     <Route path="/posts" component={Posts} />
                     {/* <Route path="/" component={Posts} /> */}
-                    <Redirect from="/" to="/posts" />
+                    {/* <Redirect from="/" to="/posts" /> */}
+                    <Route render={() => <h1>Not found</h1>}/>
                 </Switch>   
             </div>
         );

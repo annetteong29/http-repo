@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import axios from 'axios';
 // import axios from '../../axios'; 
-import { Route, NavLink, Switch } from 'react-router-dom';
+import { Route, NavLink, Switch, Redirect } from 'react-router-dom';
 
 import './Blog.css';
 import Posts from '../../containers/Blog/Posts/Posts';
@@ -52,7 +52,7 @@ class Blog extends Component {
                     {this.state.auth ? <Route path="/new-post" component={AsyncNewPost} /> : null}
                     <Route path="/posts" component={Posts} />
                     {/* <Route path="/" component={Posts} /> */}
-                    {/* <Redirect from="/" to="/posts" /> */}
+                    <Redirect from="/" to="/posts" />
                     <Route render={() => <h1>Not found</h1>}/>
                 </Switch>   
             </div>

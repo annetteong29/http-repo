@@ -11,15 +11,24 @@ class FullPost extends Component {
 
     componentDidMount() {
         console.log(this.props);
+        // first time a single post is loaded from Posts
+        this.loadData();
+    }
+
+    // will be executed again because of new props
+    // so new match and params objects (among others)
+    componentDidUpdate() {
+        // second time a single post is loaded from Posts
+        this.loadData();
+    }
+
+    loadData() {
         if (this.props.match.params.postId) {
             if (!this.state.loadedPost || 
-                    (this.state.loadedPost && (this.state.loadedPost.id !== this.props.match.params.postId))) {
+                    (this.state.loadedPost && (this.state.loadedPost.id !== +this.props.match.params.postId))) {
                 axios.get('/posts/' + this.props.match.params.postId)
                 .then(response => {
                     // console.log(response);
-                    // infinite loop created here 
-                    // we have to only send this HTTP request if 
-                    // a new post has been uploaded
                     this.setState({loadedPost: response.data})
                 });
             }
@@ -28,8 +37,7 @@ class FullPost extends Component {
         const query = new URLSearchParams(this.props.location.search);
         for (let param of query.entries()) {
             console.log(param); // yields ['start', '5']
-    }
-
+        }
     }
 
     deletePostHandler = () => {
@@ -42,8 +50,7 @@ class FullPost extends Component {
     render () {
         let post = <p style={{ textAlign: 'center' }}>Please select a Post!</p>;
         if ( this.props.match.params.postId ) {
-            post = <Spinner />;
-            // <p style={{ textAlign: 'center' }}>[FullPost] Loading...</p>;
+            post = <p style={{ textAlign: 'center' }}>[FullPost] Loading...</p>;
         }
         if (this.state.loadedPost) {
             post = (

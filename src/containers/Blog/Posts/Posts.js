@@ -9,7 +9,10 @@ class Posts extends Component {
         posts: []
     }
 
+    // is executed each time page is changed
+    // because Posts component is added and removed to the DOM all the time 
     componentDidMount() {
+        console.log(this.props);
         axios.get('/posts')
             .then(response => {
                 // edit data fetched
@@ -41,6 +44,8 @@ class Posts extends Component {
                         key={post.id}
                         title={post.title}
                         author={post.author}
+                        // more primitive way to pass on props to Post component
+                        // match={this.props.match}
                         clicked={() => this.postSelectedHandler(post.id)}/>;
                 }
             );

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from '../../../axios';
+import { Link } from 'react-router-dom';
 
 import Post from '../../../components/Post/Post';
 import './Posts.css';
@@ -13,7 +14,7 @@ class Posts extends Component {
     // because Posts component is added and removed to the DOM all the time 
     componentDidMount() {
         console.log(this.props);
-        axios.get('/posts')
+        axios.get('/posts/')
             .then(response => {
                 // edit data fetched
                 const posts = response.data.slice(0,4);
@@ -40,11 +41,13 @@ class Posts extends Component {
         if (!this.state.error) {
             posts = this.state.posts.map(
                 post => {
-                    return <Post 
-                        key={post.id}
+                    return (<Link to={'/' + post.id} key={post.id}>
+                        <Post 
                         title={post.title}
                         author={post.author}
-                        clicked={() => this.postSelectedHandler(post.id)}/>;
+                        clicked={() => this.postSelectedHandler(post.id)}
+                        />
+                    </Link>);
                 }
             );
         } 

@@ -16,7 +16,10 @@
     color: black;
 }
 
+/* if using activeClassName="my-active", 
+have to change a.active to a.my-active to work */
 .Blog a:hover,
-.Blog a:active {
+.Blog a:active,
+.Blog a.active {
     color: #fa923f;
 }

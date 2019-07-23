@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import axios from 'axios';
 // import axios from '../../axios'; 
-import { Route, Link, withRouter } from 'react-router-dom';
+import { Route, NavLink } from 'react-router-dom';
 
 import './Blog.css';
 import Posts from '../../containers/Blog/Posts/Posts';
@@ -16,14 +16,23 @@ class Blog extends Component {
                 <header>
                     <nav>
                         <ul>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to=
+                            <li><NavLink 
+                                exact 
+                                to="/"
+                                activeClassName="my-active"
+                                // inline styling
+                                activeStyle={{
+                                    color: '#fa923f',
+                                    textDecoration: 'underline'
+                                }}
+                            >Home</NavLink></li>
+                            <li><NavLink to=
                             {{
                                 pathname: '/new-post',
                                 hash: '#submit',
                                 search: '?quick-submit=true'
                             }}
-                            >New Post</Link></li>
+                            >New Post</NavLink></li>
                         </ul>
                     </nav>
                 </header>
@@ -36,4 +45,4 @@ class Blog extends Component {
     }
 }
 
-export default withRouter(Blog);
+export default Blog;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import axios from 'axios';
 // import axios from '../../axios'; 
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, withRouter } from 'react-router-dom';
 
 import './Blog.css';
 import Posts from '../../containers/Blog/Posts/Posts';
@@ -17,11 +17,13 @@ class Blog extends Component {
                     <nav>
                         <ul>
                             <li><Link to="/">Home</Link></li>
-                            <li><Link to={{
+                            <li><Link to=
+                            {{
                                 pathname: '/new-post',
                                 hash: '#submit',
                                 search: '?quick-submit=true'
-                            }}>New Post</Link></li>
+                            }}
+                            >New Post</Link></li>
                         </ul>
                     </nav>
                 </header>
@@ -34,4 +36,4 @@ class Blog extends Component {
     }
 }
 
-export default Blog;
+export default withRouter(Blog);

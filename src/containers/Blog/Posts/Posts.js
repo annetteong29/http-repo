@@ -44,8 +44,6 @@ class Posts extends Component {
                         key={post.id}
                         title={post.title}
                         author={post.author}
-                        // more primitive way to pass on props to Post component
-                        // match={this.props.match}
                         clicked={() => this.postSelectedHandler(post.id)}/>;
                 }
             );
